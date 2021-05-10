@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 #include "TetrisPiece.h"
 #include "TetrisSettings.h"
 #include "TetrisSoundEngine.h"

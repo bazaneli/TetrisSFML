@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "TetrisPiece.h"
 
 TetrisPiece::TetrisPiece(vector<vector<vector<int>>> layout, int size) : size{ size }, layout{ layout }

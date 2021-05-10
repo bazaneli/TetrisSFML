@@ -1,8 +1,13 @@
 #include <iostream>
 #include <memory>
+#include <string>
+
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+
 
 #include "TetrisPiece.h"
 #include "TetrisEngine.h"
@@ -32,8 +37,7 @@ int main()
 
     sf::RenderWindow window(
         sf::VideoMode( (settings.basePixelSize + settings.scoreInformationSize) * settings.fieldWidth ,
-                        settings.basePixelSize * settings.fieldHeight),
-        "Tetris!", sf::Style::Titlebar | sf::Style::Close);
+                        settings.basePixelSize * settings.fieldHeight), "Tetris!", sf::Style::Titlebar | sf::Style::Close);
 
     
     vector<std::unique_ptr<ItemDrawable>> drawablesVector;
