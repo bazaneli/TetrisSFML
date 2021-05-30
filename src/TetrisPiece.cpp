@@ -2,19 +2,24 @@
 
 #include "TetrisPiece.h"
 
-TetrisPiece::TetrisPiece(vector<vector<vector<int>>> layout, int size) : size{ size }, layout{ layout }
+TetrisPiece::TetrisPiece(vector<vector<vector<TileType>>> layout, int size, int pieceID) : size{ size }, layout{ layout }, pieceID{pieceID}
 {
     numberOfRotations = static_cast<int>(layout.size());
 }
 
-vector<vector<int>> TetrisPiece::GetCurrentLayout()
+vector<vector<TileType>> TetrisPiece::GetCurrentLayout() const
 {
     return layout[currentRotation];
 }
 
-int TetrisPiece::GetSize()
+int TetrisPiece::GetSize() const
 {
     return size;
+}
+
+int TetrisPiece::GetPieceID() const
+{
+    return pieceID;
 }
 
 void TetrisPiece::RotateClockwise()

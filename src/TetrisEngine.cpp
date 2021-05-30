@@ -50,7 +50,7 @@ void TetrisEngine::TryPerfomPieceFall()
         for (int piecePositionY = 0; piecePositionY < currentPiece.GetSize(); piecePositionY++)
             for (int piecePositionX = 0; piecePositionX < currentPiece.GetSize(); piecePositionX++)
             {
-                if (currentPiece.GetCurrentLayout()[piecePositionY][piecePositionX] != 0)
+                if (currentPiece.GetCurrentLayout()[piecePositionY][piecePositionX] != TileType::emptySpace)
                     board[currentDy + piecePositionY][currentDx + piecePositionX] = currentPiece.GetCurrentLayout()[piecePositionY][piecePositionX];
             }
 
@@ -61,7 +61,7 @@ void TetrisEngine::TryPerfomPieceFall()
             {
                 bool formedALine = true;
                 for (int x = settings.borderSize; x < settings.fieldWidth - settings.borderSize; x++)
-                    if (board[currentDy + piecePositionY][x] == 0)
+                    if (board[currentDy + piecePositionY][x] == TileType::emptySpace)
                     {
                         formedALine = false;
                         break;
@@ -70,20 +70,20 @@ void TetrisEngine::TryPerfomPieceFall()
                 if (formedALine)
                 {
                     for (int x = settings.borderSize; x < settings.fieldWidth - settings.borderSize; x++)
-                        board[currentDy + piecePositionY][x] = 8;
+                        board[currentDy + piecePositionY][x] = TileType::preExplosion;
 
                     linesCompleted.push_back(currentDy + piecePositionY);
                 }
             }
         }
 
+        soundEngine.PlayHitFloor();
+
         //choose next piece
         currentDx = GetMiddleOfField();
         currentDy = 0;
         currentPiece = nextPiece;
         nextPiece = vectorPieces[rand() % NUMBER_OF_PIECES];
-        
-        soundEngine.PlayHitFloor();
 
         //game over
         isGameOver = !IsValidPositionForPiece(currentPiece, board, currentDx, currentDy);
@@ -99,7 +99,7 @@ void TetrisEngine::PerformScorePoints()
         {
             for (int px = settings.borderSize; px < settings.fieldWidth - settings.borderSize; px++)
             {
-                board[l][px] = 9;
+                board[l][px] = TileType::explosion;
             }
         }
     }
@@ -122,18 +122,18 @@ void TetrisEngine::PerformScorePoints()
     }
 }
 
-bool TetrisEngine::IsValidPositionForPiece(TetrisPiece& piece, vector<vector<int>>& board, int posX, int posY)
+bool TetrisEngine::IsValidPositionForPiece(TetrisPiece& piece, vector<vector<TileType>>& board, int posX, int posY)
 {
     for (int piecePositionY = 0; piecePositionY < piece.GetSize(); piecePositionY++)
     {
         for (int piecePositionX = 0; piecePositionX < piece.GetSize(); piecePositionX++)
         {
-            if (piece.GetCurrentLayout()[piecePositionY][piecePositionX] == 1)
+            if (piece.GetCurrentLayout()[piecePositionY][piecePositionX] == TileType::pieceOnBoard)
             {
                 int boardY = piecePositionY + posY;
                 int boardX = piecePositionX + posX;
 
-                if (board[boardY][boardX] != 0)
+                if (board[boardY][boardX] != TileType::emptySpace)
                     return false;
             }
         }

@@ -22,14 +22,14 @@
 using std::vector;
 
 vector<TetrisPiece> GeneratePieces();
-vector<vector<int>> GenerateBoard(int fieldHeight, int fieldWidth, int borderSize);
+vector<vector<TileType>> GenerateBoard(int fieldHeight, int fieldWidth, int borderSize);
 
 int main()
 {
     TetrisSettings settings;
 
     vector<TetrisPiece> vectorPieces = GeneratePieces();
-    vector<vector<int>> board = GenerateBoard(settings.fieldHeight, settings.fieldWidth, settings.borderSize);
+    vector<vector<TileType>> board = GenerateBoard(settings.fieldHeight, settings.fieldWidth, settings.borderSize);
 
     TetrisSoundEngine soundEngine;
 

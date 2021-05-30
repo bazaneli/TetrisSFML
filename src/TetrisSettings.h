@@ -14,5 +14,7 @@ public:
 	int frameRateLimite;
 
 	const int NumberOfPieces = 7;
+
+	float spriteScale;
 };
 

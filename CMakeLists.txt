@@ -7,10 +7,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 find_package(SFML 2.5.1 COMPONENTS system window graphics audio REQUIRED)
 
-add_executable(TetrisSFML Tetris.cpp 
-BoardDwg.cpp ScoreDwg.cpp TetrisEngine.cpp TetrisSettings.cpp
-ItemDrawable.cpp TetrisAssets.cpp TetrisPiece.cpp TetrisSoundEngine.cpp
-NextPieceDwg.cpp TetrisPieceDwg.cpp
+add_executable(TetrisSFML 
+  src/Tetris.cpp 
+  src/BoardDwg.cpp 
+  src/ScoreDwg.cpp 
+  src/TetrisEngine.cpp 
+  src/TetrisSettings.cpp
+  src/ItemDrawable.cpp 
+  src/TetrisAssets.cpp 
+  src/TetrisPiece.cpp 
+  src/TetrisSoundEngine.cpp
+  src/NextPieceDwg.cpp 
+  src/TetrisPieceDwg.cpp
 )
 
 target_include_directories(TetrisSFML 
@@ -26,3 +34,5 @@ target_link_libraries(TetrisSFML sfml-system sfml-window sfml-graphics sfml-audi
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

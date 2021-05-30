@@ -7,7 +7,7 @@ void ScoreDwg::LoadSprites()
 
 	text.setFillColor(sf::Color::Blue);
 	text.setStyle(sf::Text::Bold);
-	text.setCharacterSize(64);
+	text.setCharacterSize(64*settings.spriteScale);
 }
 
 void ScoreDwg::Draw()
@@ -18,7 +18,7 @@ void ScoreDwg::Draw()
 
 	text.setPosition(static_cast<float>(
 		(settings.fieldWidth + settings.borderSize) * settings.basePixelSize),
-		10 * 32);
+		10 * settings.basePixelSize);
 
 	window.draw(text);
 }

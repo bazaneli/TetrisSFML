@@ -12,7 +12,7 @@ class TetrisPieceDwg: public ItemDrawable
 private:
 
 	sf::Texture pieceTexture;
-	sf::Sprite pieceSprite;
+	sf::Sprite pieceSprite;	
 
 public:
 	TetrisPieceDwg(sf::RenderWindow& windowRef, TetrisSettings& settings, TetrisEngine& engine) :

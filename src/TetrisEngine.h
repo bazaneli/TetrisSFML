@@ -2,15 +2,22 @@
 
 #include <cmath>
 
+#include <vector>
+
 #include "TetrisPiece.h"
 #include "TetrisSettings.h"
 #include "TetrisSoundEngine.h"
+#include "TileType.h"
 
-#define NUMBER_OF_PIECES 7
+using std::vector;
+
 
 class TetrisEngine
 {
 private:
+
+	const int NUMBER_OF_PIECES = 7;
+
 	bool isGameOver = false;
 
 	int currentPoints = 0;
@@ -44,7 +51,7 @@ private:
 public:
 
 	vector<TetrisPiece> vectorPieces;
-	vector<vector<int>> board;
+	vector<vector<TileType>> board;
 
 	TetrisSoundEngine& soundEngine;
 
@@ -52,7 +59,7 @@ public:
 	TetrisPiece& currentPiece;
 	TetrisSettings& settings;
 
-	TetrisEngine(int timeToFall, int timeToClearLine, TetrisSettings& settings, vector<TetrisPiece>& vectorPieces, vector<vector<int>>& board, TetrisSoundEngine& soundEngine) : timeToFall{ timeToFall }
+	TetrisEngine(int timeToFall, int timeToClearLine, TetrisSettings& settings, vector<TetrisPiece>& vectorPieces, vector<vector<TileType>>& board, TetrisSoundEngine& soundEngine) : timeToFall{ timeToFall }
 		,timeToClearLine{ timeToClearLine }
 		, settings{ settings }
 		, vectorPieces{ vectorPieces}
@@ -63,7 +70,7 @@ public:
 	{
 		currentDx = GetMiddleOfField();
 	};
-	bool IsValidPositionForPiece(TetrisPiece& piece, vector<vector<int>>& board, int posX, int posY);
+	bool IsValidPositionForPiece(TetrisPiece& piece, vector<vector<TileType>>& board, int posX, int posY);
 	bool IsGameOver();
 	void PerformTick();
 
